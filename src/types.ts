@@ -6,3 +6,7 @@ export interface Product {
     fractional: number;
   };
 }
+
+export interface CartItem extends Product {
+  quantity: number;
+}
