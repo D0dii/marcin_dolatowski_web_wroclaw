@@ -2,11 +2,11 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { useCart } from "@/hooks/use-cart";
-import { calculateItemTotalPrice } from "@/lib/utils";
+import Link from "next/link";
 
 export function CartSummary() {
-  const { cart, clearCart } = useCart();
-  const totalPrice = cart.reduce((prev, curr) => prev + calculateItemTotalPrice(curr), 0);
+  const { cart, clearCart, getTotalPrice } = useCart();
+  const totalPrice = getTotalPrice();
   return (
     <Card>
       <CardHeader>
@@ -23,7 +23,10 @@ export function CartSummary() {
         </div>
       </CardContent>
       <CardFooter className="flex flex-col gap-2">
-        <Button className="w-full">Przejdź do podsumowania</Button>
+        <Link className="w-full" href="/summary">
+          <Button className="w-full">Przejdź do podsumowania</Button>
+        </Link>
+
         <Button variant="outline" className="w-full" onClick={clearCart}>
           Wyczyść koszyk
         </Button>

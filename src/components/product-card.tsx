@@ -3,12 +3,9 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Product } from "@/types";
 import { useCart } from "@/hooks/use-cart";
+import { formatPrice } from "@/lib/utils";
 
 export function ProductCard({ product }: { product: Product }) {
-  const formatPrice = (price: { main: number; fractional: number }) => {
-    return `$${price.main}.${price.fractional.toString().padStart(2, "0")}`;
-  };
-
   const { cart, addToCart, removeFromCart } = useCart();
   return (
     <Card className="overflow-hidden w-[200px]">

@@ -1,16 +1,12 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/hooks/use-cart";
-import { calculateItemTotalPrice } from "@/lib/utils";
+import { calculateItemTotalPrice, formatPrice } from "@/lib/utils";
 import { CartItem } from "@/types";
 import { Minus, Plus } from "lucide-react";
 
 export function CartItemCard({ item }: { item: CartItem }) {
   const { removeFromCart, increaseQuantityInCart, decreaseQuantityInCart } = useCart();
-
-  const formatPrice = (price: { main: number; fractional: number }) => {
-    return `${price.main}.${price.fractional.toString().padStart(2, "0")} zł`;
-  };
 
   const itemTotal = calculateItemTotalPrice(item);
 

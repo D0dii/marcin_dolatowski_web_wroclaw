@@ -1,4 +1,5 @@
 import { cartAtom } from "@/atoms/cartAtom";
+import { calculateItemTotalPrice } from "@/lib/utils";
 import { Product } from "@/types";
 import { useAtom } from "jotai";
 
@@ -29,5 +30,16 @@ export function useCart() {
   const clearCart = () => {
     setCart([]);
   };
-  return { cart, addToCart, removeFromCart, increaseQuantityInCart, decreaseQuantityInCart, clearCart };
+  const getTotalPrice = () => {
+    return cart.reduce((prev, curr) => prev + calculateItemTotalPrice(curr), 0);
+  };
+  return {
+    cart,
+    addToCart,
+    removeFromCart,
+    increaseQuantityInCart,
+    decreaseQuantityInCart,
+    clearCart,
+    getTotalPrice,
+  };
 }
