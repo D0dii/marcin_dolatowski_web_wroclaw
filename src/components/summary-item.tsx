@@ -1,4 +1,4 @@
-import { calculateItemTotalPrice, formatPrice } from "@/lib/utils";
+import { calculateItemTotalPrice, formatCurrencyZloty, formatPrice } from "@/lib/utils";
 import { CartItem } from "@/types";
 
 export function SummaryItem({ item }: { item: CartItem }) {
@@ -11,7 +11,7 @@ export function SummaryItem({ item }: { item: CartItem }) {
       <div className="grid grid-cols-3 gap-4 text-right">
         <div className="text-muted-foreground">{item.quantity}x</div>
         <div className="text-muted-foreground">{formatPrice(item.price)}</div>
-        <div className="font-medium">{total.toFixed(2)} zł</div>
+        <div className="font-medium">{formatCurrencyZloty(total)}</div>
       </div>
     </div>
   );

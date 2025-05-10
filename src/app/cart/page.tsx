@@ -3,7 +3,6 @@ import Link from "next/link";
 import { CartItemCard } from "@/components/cart-item-card";
 import { CartSummary } from "@/components/cart-summary";
 import { Button } from "@/components/ui/button";
-import { ShoppingBag } from "lucide-react";
 
 import { useCart } from "@/hooks/use-cart";
 import { EmptyCart } from "@/components/empty-cart";
@@ -37,9 +36,9 @@ export default function Cart() {
       </div>
 
       <div className="mt-8">
-        <Link href="/">
-          <Button variant="outline">Kontynuuj zakupy</Button>
-        </Link>
+        <Button asChild variant="outline">
+          <Link href="/">Kontynuuj zakupy</Link>
+        </Button>
       </div>
     </div>
   );

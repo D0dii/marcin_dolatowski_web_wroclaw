@@ -1,7 +1,9 @@
 "use client";
 import { SummaryItem } from "@/components/summary-item";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { useOrders } from "@/hooks/use-orders";
+import { formatCurrencyZloty } from "@/lib/utils";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 
@@ -31,14 +33,16 @@ export default function ThankYou() {
           <div className="mt-6 space-y-4">
             <div className="flex justify-between font-bold text-lg">
               <span>Razem</span>
-              <span>{order.totalPrice.toFixed(2)} zł</span>
+              <span>{formatCurrencyZloty(order.totalPrice)}</span>
             </div>
           </div>
         </CardContent>
-        <CardFooter>
-          <Link href="/">Kontynuuj zakupy</Link>
-        </CardFooter>
       </Card>
+      <div className="flex items-center justify-center">
+        <Button asChild className="mt-6 w-[350px]">
+          <Link href="/">Przejdź do strony głównej</Link>
+        </Button>
+      </div>
     </div>
   );
 }

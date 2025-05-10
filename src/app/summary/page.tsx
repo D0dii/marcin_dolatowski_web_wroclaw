@@ -10,6 +10,7 @@ import { Order } from "@/types";
 import { useOrders } from "@/hooks/use-orders";
 import { EmptyCart } from "@/components/empty-cart";
 import { useRouter } from "next/navigation";
+import { formatCurrencyZloty } from "@/lib/utils";
 
 export default function SummaryPage() {
   const router = useRouter();
@@ -58,7 +59,7 @@ export default function SummaryPage() {
           <div className="mt-6 space-y-4">
             <div className="flex justify-between font-bold text-lg">
               <span>Razem</span>
-              <span>{total.toFixed(2)} zł</span>
+              <span>{formatCurrencyZloty(total)}</span>
             </div>
           </div>
         </CardContent>
@@ -68,11 +69,9 @@ export default function SummaryPage() {
             Złóż Zamówienie
           </Button>
 
-          <Link href="/cart" className="w-full">
-            <Button variant="outline" className="w-full">
-              Wróć do koszyka
-            </Button>
-          </Link>
+          <Button asChild variant="outline" className="w-full">
+            <Link href="/cart">Wróć do koszyka</Link>
+          </Button>
         </CardFooter>
       </Card>
     </div>

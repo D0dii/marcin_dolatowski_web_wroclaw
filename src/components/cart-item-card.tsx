@@ -1,7 +1,7 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/hooks/use-cart";
-import { calculateItemTotalPrice, formatPrice } from "@/lib/utils";
+import { calculateItemTotalPrice, formatCurrencyZloty, formatPrice } from "@/lib/utils";
 import { CartItem } from "@/types";
 import { Minus, Plus } from "lucide-react";
 
@@ -46,7 +46,7 @@ export function CartItemCard({ item }: { item: CartItem }) {
 
         <Button onClick={() => removeFromCart(item.id)}>Usuń z koszyka</Button>
 
-        <div className="w-20 text-right font-medium">{itemTotal.toFixed(2)} zł</div>
+        <div className="w-20 text-right font-medium">{formatCurrencyZloty(itemTotal)}</div>
       </div>
     </div>
   );

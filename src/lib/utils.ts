@@ -13,3 +13,7 @@ export function calculateItemTotalPrice(item: CartItem) {
 export function formatPrice(price: { main: number; fractional: number }) {
   return `${price.main}.${price.fractional.toString().padStart(2, "0")} zł`;
 }
+
+export function formatCurrencyZloty(price: number) {
+  return `${price.toFixed(2)} zł`;
+}
