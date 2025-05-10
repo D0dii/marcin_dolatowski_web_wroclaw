@@ -1,7 +1,7 @@
 "use client";
 import { SummaryItem } from "@/components/summary-item";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useOrders } from "@/hooks/use-orders";
 import { formatCurrencyZloty } from "@/lib/utils";
 import { Loader2 } from "lucide-react";
