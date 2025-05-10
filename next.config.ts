@@ -5,6 +5,7 @@ const nextConfig = {
   images: { unoptimized: true },
   assetPrefix: isProd ? "/marcin_dolatowski_web_wroclaw/" : "",
   basePath: isProd ? "/marcin_dolatowski_web_wroclaw" : "",
+  output: "standalone",
 };
 
 export default nextConfig;
