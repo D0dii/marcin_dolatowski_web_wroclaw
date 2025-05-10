@@ -1,8 +1,9 @@
-name: publish-to-github-pages
+name: Deploy Next.js site to GitHub Pages
+
 on:
   push:
-    branches:
-      - main
+    branches: ["main"]
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -11,29 +12,48 @@ permissions:
 
 concurrency:
   group: "pages"
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout 🛎️
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Setup Node.js ⚙️ - Cache dependencies ⚡ - Install dependencies 🔧
-        uses: ./.github/workflows/setup-node
-
-      - name: Setup Pages ⚙️
-        uses: actions/configure-pages@v4
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
         with:
-          static_site_generator: next
+          version: 8 # or your preferred pnpm version
 
-      - name: Build with Next.js 🏗️
-        run: npx next build
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20" # or your project's Node version
+          cache: "pnpm"
 
-      - name: Upload artifact 📡
-        uses: actions/upload-pages-artifact@v3
+      - name: Setup pnpm cache
+        id: pnpm-cache
+        run: echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+
+      - uses: actions/cache@v3
+        name: Cache pnpm store
+        with:
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build with Next.js
+        run: pnpm next build
+
+      - name: Export static HTML
+        run: pnpm next export
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
         with:
           path: ./out
 
@@ -41,11 +61,9 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-
     runs-on: ubuntu-latest
     needs: build
-
     steps:
-      - name: Publish to GitHub Pages 🚀
+      - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v2
