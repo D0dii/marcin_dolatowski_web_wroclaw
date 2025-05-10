@@ -7,5 +7,12 @@ export function useOrders() {
   const addOrder = (order: Order) => {
     setOrders((prev) => [...prev, order]);
   };
-  return { orders, addOrder };
+  const getOrder = (orderId: string) => {
+    const potentialOrder = orders.find((o) => o.id === orderId);
+    if (potentialOrder) {
+      return potentialOrder;
+    }
+    return null;
+  };
+  return { orders, addOrder, getOrder };
 }
