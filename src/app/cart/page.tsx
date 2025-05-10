@@ -6,9 +6,18 @@ import { Button } from "@/components/ui/button";
 
 import { useCart } from "@/hooks/use-cart";
 import { EmptyCart } from "@/components/empty-cart";
+import { Loader2 } from "lucide-react";
 
 export default function Cart() {
   const { cart } = useCart();
+
+  if (cart === undefined) {
+    return (
+      <div className="flex items-center justify-center mt-64">
+        <Loader2 className="animate-spin" size={56} />
+      </div>
+    );
+  }
 
   if (cart.length === 0) {
     return <EmptyCart />;

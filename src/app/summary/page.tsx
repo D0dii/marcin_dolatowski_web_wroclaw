@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Loader2 } from "lucide-react";
 import { useCart } from "@/hooks/use-cart";
 import { SummaryItem } from "@/components/summary-item";
 import { Order } from "@/types";
@@ -21,16 +21,24 @@ export default function SummaryPage() {
   const handlePlaceOrer = () => {
     const date = new Date();
     const newOrderId = crypto.randomUUID();
+    const items = cart === undefined ? [] : [...cart];
     const newOrder = {
       id: newOrderId,
       date: date.toISOString(),
       totalPrice: total,
-      items: [...cart],
+      items: items,
     } satisfies Order;
     addOrder(newOrder);
     clearCart();
     router.push(`/thank-you/${newOrderId}`);
   };
+  if (cart === undefined) {
+    return (
+      <div className="flex items-center justify-center mt-64">
+        <Loader2 className="animate-spin" size={56} />
+      </div>
+    );
+  }
   if (cart.length === 0) {
     return <EmptyCart />;
   }

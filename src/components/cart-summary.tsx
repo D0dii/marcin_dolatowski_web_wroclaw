@@ -15,7 +15,7 @@ export function CartSummary() {
       </CardHeader>
       <CardContent className="space-y-4">
         <div className="flex justify-between">
-          <span>Produkty ({cart.length})</span>
+          <span>Produkty ({cart?.length})</span>
           <span>{formatCurrencyZloty(totalPrice)}</span>
         </div>
         <div className="flex justify-between font-bold text-lg border-t pt-4">

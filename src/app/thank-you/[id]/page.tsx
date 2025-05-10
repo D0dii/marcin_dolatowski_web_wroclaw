@@ -4,14 +4,22 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { useOrders } from "@/hooks/use-orders";
 import { formatCurrencyZloty } from "@/lib/utils";
+import { Loader2 } from "lucide-react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 
 export default function ThankYou() {
   const params = useParams<{ id: string }>();
-  const { getOrder } = useOrders();
+  const { orders, getOrder } = useOrders();
   const order = getOrder(params.id);
-  if (!order) {
+  if (orders === undefined) {
+    return (
+      <div className="flex items-center justify-center mt-64">
+        <Loader2 className="animate-spin" size={56} />
+      </div>
+    );
+  }
+  if (order === null) {
     return <div>Something went wrong</div>;
   }
   return (
