@@ -1,4 +1,11 @@
 import { CartItem } from "@/types";
-import { atomWithStorage } from "jotai/utils";
+import { atomWithStorage, createJSONStorage } from "jotai/utils";
 
-export const cartAtom = atomWithStorage<CartItem[] | undefined>("cart", undefined);
+const baseStorage = createJSONStorage<CartItem[] | [] | undefined>(() => sessionStorage);
+
+const storage = {
+  ...baseStorage,
+  getItem: (key: string) => baseStorage.getItem(key, []),
+};
+
+export const cartAtom = atomWithStorage<CartItem[] | undefined>("cart", undefined, storage);
