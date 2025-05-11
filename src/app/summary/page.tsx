@@ -32,7 +32,7 @@ export default function SummaryPage() {
       clearCart();
     }, 1000);
     addOrder(newOrder);
-    router.push(`/thank-you/${newOrderId}`);
+    router.push("thank-you");
   };
   if (cart === undefined) {
     return (

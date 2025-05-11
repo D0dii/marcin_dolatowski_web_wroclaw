@@ -11,15 +11,17 @@ export function useOrders() {
     }
     setOrders([...orders, order]);
   };
-  const getOrder = (orderId: string) => {
+  const getLatestOrder = () => {
     if (orders === undefined) {
       return null;
     }
-    const potentialOrder = orders.find((o) => o.id === orderId);
+    const potentialOrder = [...orders].sort(
+      (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+    )[0];
     if (potentialOrder) {
       return potentialOrder;
     }
     return null;
   };
-  return { orders, addOrder, getOrder };
+  return { orders, addOrder, getLatestOrder };
 }

@@ -6,12 +6,10 @@ import { useOrders } from "@/hooks/use-orders";
 import { formatCurrencyZloty } from "@/lib/utils";
 import { Loader2 } from "lucide-react";
 import Link from "next/link";
-import { useParams } from "next/navigation";
 
 export default function ThankYou() {
-  const params = useParams<{ id: string }>();
-  const { orders, getOrder } = useOrders();
-  const order = getOrder(params.id);
+  const { orders, getLatestOrder } = useOrders();
+  const order = getLatestOrder();
   if (orders === undefined) {
     return (
       <div className="flex items-center justify-center mt-64">
