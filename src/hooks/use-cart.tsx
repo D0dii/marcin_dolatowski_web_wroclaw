@@ -44,6 +44,16 @@ export function useCart() {
     }
     return cart.reduce((prev, curr) => prev + calculateItemTotalPrice(curr), 0);
   };
+  const getProductQuantity = (id: number) => {
+    if (cart === undefined) {
+      return 0;
+    }
+    const product = cart.find((p) => p.id === id);
+    if (product) {
+      return product.quantity;
+    }
+    return 0;
+  };
   return {
     cart,
     addToCart,
@@ -52,5 +62,6 @@ export function useCart() {
     decreaseQuantityInCart,
     clearCart,
     getTotalPrice,
+    getProductQuantity,
   };
 }

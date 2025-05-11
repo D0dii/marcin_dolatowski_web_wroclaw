@@ -6,9 +6,17 @@ import { Product } from "@/types";
 import { useCart } from "@/hooks/use-cart";
 import { formatPrice } from "@/lib/utils";
 import { Skeleton } from "./ui/skeleton";
+import { IncreaseDecreaseQuantity } from "./increase-decrease-quantity";
 
 export function ProductCard({ product }: { product: Product }) {
-  const { cart, addToCart, removeFromCart } = useCart();
+  const {
+    cart,
+    addToCart,
+    removeFromCart,
+    increaseQuantityInCart,
+    decreaseQuantityInCart,
+    getProductQuantity,
+  } = useCart();
   if (cart === undefined) {
     return (
       <Card className="overflow-hidden w-[200px]">
@@ -26,7 +34,7 @@ export function ProductCard({ product }: { product: Product }) {
     );
   }
   return (
-    <Card className="overflow-hidden w-[200px]">
+    <Card className="overflow-hidden w-[200px] h-[480px]">
       <CardHeader className="p-0">
         <Image
           src={
@@ -45,9 +53,16 @@ export function ProductCard({ product }: { product: Product }) {
       </CardContent>
       <CardFooter className="p-4 pt-0">
         {cart.find((p) => p.id === product.id) ? (
-          <Button onClick={() => removeFromCart(product.id)} className="w-full">
-            Usuń z koszyka
-          </Button>
+          <div className="flex flex-col gap-2 w-full">
+            <IncreaseDecreaseQuantity
+              increaseQuantityInCart={increaseQuantityInCart}
+              decreaseQuantityInCart={decreaseQuantityInCart}
+              item={{ ...product, quantity: getProductQuantity(product.id) }}
+            />
+            <Button onClick={() => removeFromCart(product.id)} className="w-full">
+              Usuń z koszyka
+            </Button>
+          </div>
         ) : (
           <Button onClick={() => addToCart(product)} className="w-full">
             Dodaj do koszyka
