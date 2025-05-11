@@ -28,9 +28,8 @@ export default function SummaryPage() {
       totalPrice: total,
       items: items,
     } satisfies Order;
-    setTimeout(() => {
-      clearCart();
-    }, 2000);
+
+    clearCart();
     addOrder(newOrder);
     router.push("thank-you");
   };
