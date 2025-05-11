@@ -1,10 +1,8 @@
-const isProd = process.env.NODE_ENV === "production";
-
 const nextConfig = {
   reactStrictMode: true,
-  images: { unoptimized: true, path: "/" },
-  assetPrefix: isProd ? "/marcin_dolatowski_web_wroclaw/" : "",
-  basePath: isProd ? "/marcin_dolatowski_web_wroclaw" : "",
+  images: { unoptimized: true },
+  assetPrefix: "/marcin_dolatowski_web_wroclaw/",
+  basePath: "/marcin_dolatowski_web_wroclaw",
   output: "export",
 };
 
