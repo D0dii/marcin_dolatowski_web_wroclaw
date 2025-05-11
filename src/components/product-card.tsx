@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
@@ -27,7 +28,16 @@ export function ProductCard({ product }: { product: Product }) {
   return (
     <Card className="overflow-hidden w-[200px]">
       <CardHeader className="p-0">
-        <Image src="/groceries.svg" alt={product.name} width={200} height={150} />
+        <Image
+          src={
+            process.env.NODE_ENV === "production"
+              ? "/marcin_dolatowski_web_wroclaw/groceries.svg"
+              : "/groceries.svg"
+          }
+          alt={product.name}
+          width={200}
+          height={150}
+        />
       </CardHeader>
       <CardContent className="p-4">
         <CardTitle className="text-lg">{product.name}</CardTitle>
