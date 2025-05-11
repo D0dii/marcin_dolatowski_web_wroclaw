@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { useCart } from "@/hooks/use-cart";
 import { EmptyCart } from "@/components/empty-cart";
 import { Loader2 } from "lucide-react";
+import { RecommendedProducts } from "@/components/recommended-products";
 
 export default function Cart() {
   const { cart } = useCart();
@@ -49,6 +50,7 @@ export default function Cart() {
           <Link href="/">Kontynuuj zakupy</Link>
         </Button>
       </div>
+      <RecommendedProducts />
     </div>
   );
 }
