@@ -4,9 +4,10 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Product } from "@/types";
 import { useCart } from "@/hooks/use-cart";
-import { formatPrice } from "@/lib/utils";
+import { formatPrice, getBasePathUrl } from "@/lib/utils";
 import { Skeleton } from "./ui/skeleton";
 import { IncreaseDecreaseQuantity } from "./increase-decrease-quantity";
+import { Trash2Icon } from "lucide-react";
 
 export function ProductCard({ product }: { product: Product }) {
   const {
@@ -34,18 +35,9 @@ export function ProductCard({ product }: { product: Product }) {
     );
   }
   return (
-    <Card className="overflow-hidden w-[200px] h-[480px]">
+    <Card className="overflow-hidden w-[200px]">
       <CardHeader className="p-0">
-        <Image
-          src={
-            process.env.NODE_ENV === "production"
-              ? "/marcin_dolatowski_web_wroclaw/groceries.svg"
-              : "/groceries.svg"
-          }
-          alt={product.name}
-          width={200}
-          height={150}
-        />
+        <Image src={getBasePathUrl("/groceries.svg")} alt={product.name} width={200} height={150} />
       </CardHeader>
       <CardContent className="p-4">
         <CardTitle className="text-lg">{product.name}</CardTitle>
@@ -53,14 +45,15 @@ export function ProductCard({ product }: { product: Product }) {
       </CardContent>
       <CardFooter className="p-4 pt-0">
         {cart.find((p) => p.id === product.id) ? (
-          <div className="flex flex-col gap-2 w-full">
+          <div className="flex gap-2 justify-between w-full">
             <IncreaseDecreaseQuantity
               increaseQuantityInCart={increaseQuantityInCart}
               decreaseQuantityInCart={decreaseQuantityInCart}
               item={{ ...product, quantity: getProductQuantity(product.id) }}
             />
-            <Button onClick={() => removeFromCart(product.id)} className="w-full">
-              Usuń z koszyka
+            <Button onClick={() => removeFromCart(product.id)}>
+              <Trash2Icon className="h-4 w-4" />
+              <span className="sr-only">Usuń z koszyka</span>
             </Button>
           </div>
         ) : (

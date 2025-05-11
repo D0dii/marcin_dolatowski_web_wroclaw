@@ -17,3 +17,7 @@ export function formatPrice(price: { main: number; fractional: number }) {
 export function formatCurrencyZloty(price: number) {
   return `${price.toFixed(2)} zł`;
 }
+
+export function getBasePathUrl(url: string) {
+  return process.env.NODE_ENV === "production" ? `/marcin_dolatowski_web_wroclaw/${url}` : url;
+}
