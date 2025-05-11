@@ -57,41 +57,46 @@ I divided the work into logical feature screens with dedicated responsibilities:
 My roadmap was driven by completing major functional chunks:
 
 🧱 INIT
-✅ Initialized project with Next.js, TailwindCSS, ShadCN UI
-✅ Organized project folder structure
-✅ Imported static product data from local JSON
+
+- ✅ Initialized project with Next.js, TailwindCSS, ShadCN UI
+- ✅ Organized project folder structure
+- ✅ Imported static product data from local JSON
 
 📄 MAIN PAGE
-✅ Defined types and fetched product list
-✅ Built reusable ProductCard component
-✅ Created a custom React hook to manage basket in localStorage
-✅ Added navigation to basket screen
+
+- ✅ Defined types and fetched product list
+- ✅ Built reusable ProductCard component
+- ✅ Created a custom React hook to manage basket in localStorage
+- ✅ Added navigation to basket screen
 
 🛒 CART PAGE
-✅ Display products from basket with interactive quantity controls
-✅ Prevent quantities under 1, allow removal
-✅ Dynamically calculate totals
-✅ Added forward/backward navigation
+
+- ✅ Display products from basket with interactive quantity controls
+- ✅ Prevent quantities under 1, allow removal
+- ✅ Dynamically calculate totals
+- ✅ Added forward/backward navigation
 
 📋 CART SUMMARY
-✅ Pulled cart data from localStorage
-✅ Rendered order summary in readable format (table)
-✅ Calculated full order cost
-✅ Submit button triggered "purchase" save and redirect to summary
-✅ Option to return to cart page
+
+- ✅ Pulled cart data from localStorage
+- ✅ Rendered order summary in readable format (table)
+- ✅ Calculated full order cost
+- ✅ Submit button triggered "purchase" save and redirect to summary
+- ✅ Option to return to cart page
 
 🙌 THANK YOU PAGE
-✅ New route displaying confirmation and saved order summary
-✅ Link to go back to main product list
+
+- ✅ New route displaying confirmation and saved order summary
+- ✅ Link to go back to main product list
 
 ### Potential Next Steps
 
 While the MVP delivers the core checkout flow, I’ve considered several possible future enhancements:
 
-🛒 Support for multiple named baskets using basket IDs in localStorage
-🧮 Dynamic product types with filterable categories on main page
-🗺️ Additional checkout steps (e.g. location, shipping)
-🧠 Optional global state management using Zustand (currently not required)
+- 🛒 Support for multiple named baskets using basket IDs in localStorage
+- 🧮 Dynamic product types with filterable categories on main page
+- 🗺️ Additional checkout steps (e.g. location, shipping)
+- 🧠 Optional global state management using Zustand (currently not required)
 
 ## Technical & Process Challenges
 
