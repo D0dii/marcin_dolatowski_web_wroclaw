@@ -30,7 +30,7 @@ export default function SummaryPage() {
     } satisfies Order;
     setTimeout(() => {
       clearCart();
-    }, 1000);
+    }, 2000);
     addOrder(newOrder);
     router.push("thank-you");
   };
